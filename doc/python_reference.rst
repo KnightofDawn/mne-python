@@ -308,6 +308,7 @@ Functions:
    circular_layout
    mne_analyze_colormap
    plot_connectivity_circle
+   plot_connectivity_matrix
    plot_cov
    plot_dipole_amplitudes
    plot_dipole_locations
@@ -854,6 +855,7 @@ Connectivity Estimation
    :toctree: generated/
    :template: function.rst
 
+   mvar_connectivity
    seed_target_indices
    spectral_connectivity
    phase_slope_index

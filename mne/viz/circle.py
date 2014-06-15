@@ -131,7 +131,7 @@ def plot_connectivity_circle(con, node_names, indices=None, n_lines=None,
                              fontsize_title=12, fontsize_names=8,
                              fontsize_colorbar=8, padding=6.,
                              fig=None, subplot=111, interactive=True,
-                             node_linewidth=2., show=True):
+                             node_linewidth=2., plot_names=True, show=True):
     """Visualize connectivity as a circular graph.
 
     Note: This code is based on the circle graph example by Nicolas P. Rougier
@@ -203,6 +203,8 @@ def plot_connectivity_circle(con, node_names, indices=None, n_lines=None,
         node. Right-click shows all connections.
     node_linewidth : float
         Line with for nodes.
+    plot_names : bool
+        Draw node names if True.
     show : bool
         Show figure if True.
 
@@ -373,19 +375,20 @@ def plot_connectivity_circle(con, node_names, indices=None, n_lines=None,
         bar.set_facecolor(color)
 
     # Draw node labels
-    angles_deg = 180 * node_angles / np.pi
-    for name, angle_rad, angle_deg in zip(node_names, node_angles, angles_deg):
-        if angle_deg >= 270:
-            ha = 'left'
-        else:
-            # Flip the label, so text is always upright
-            angle_deg += 180
-            ha = 'right'
+    if plot_names:
+        angles_deg = 180 * node_angles / np.pi
+        for name, angle_rad, angle_deg in zip(node_names, node_angles, angles_deg):
+            if angle_deg >= 270:
+                ha = 'left'
+            else:
+                # Flip the label, so text is always upright
+                angle_deg += 180
+                ha = 'right'
 
-        axes.text(angle_rad, 10.4, name, size=fontsize_names,
-                  rotation=angle_deg, rotation_mode='anchor',
-                  horizontalalignment=ha, verticalalignment='center',
-                  color=textcolor)
+            axes.text(angle_rad, 10.4, name, size=fontsize_names,
+                      rotation=angle_deg, rotation_mode='anchor',
+                      horizontalalignment=ha, verticalalignment='center',
+                      color=textcolor)
 
     if title is not None:
         plt.title(title, color=textcolor, fontsize=fontsize_title,
